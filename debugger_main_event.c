@@ -38,7 +38,7 @@ void debugger_main_loop(void) {
             break;
         }
         else {
-
+            printf("invalid command");
         }
 
         memset(command, 0, 20);
