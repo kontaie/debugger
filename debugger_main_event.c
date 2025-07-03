@@ -15,10 +15,10 @@ void AttachDebuggerToProcess(DWORD pid) {
     printf("\n\n[!] Debugger attached to process\n");
     printf("# Commands: stepin, regs, monitor, exit\n");
 
-    debugger_main_loop();
+    debugger_main_loop(pid);
 }
 
-void debugger_main_loop(void) {
+void debugger_main_loop(DWORD pid) {
     while (1) {
         printf("Enter Command ~> ");
 
@@ -26,10 +26,10 @@ void debugger_main_loop(void) {
         scanf_s("%s", command, 20);
 
         if (strcmp(command, "stepin") == 0) {
-
+            debugger_Stepin_Mode(pid);
         }
         else if (strcmp(command, "regs") == 0) {
-            debugger_Examine_Regs();
+            debugger_Examine_Regs(pid);
         }
         else if (strcmp(command, "monitor") == 0) {
             debugger_monitor();
@@ -45,14 +45,129 @@ void debugger_main_loop(void) {
     }
 }
 
-void debugger_Examine_Regs(void) {
+void debugger_Stepin_Mode(DWORD pid) {
+    HANDLE halt_thread = CreateThread(
+        NULL, 0,
+        (LPTHREAD_START_ROUTINE)exit_stepping,
+        NULL, 0,
+        NULL);
 
+    if (halt_thread == NULL) {
+        fprintf(stderr, "[-] Failed to create stop_monitoring thread Error: %lu\n", GetLastError());
+        return;
+    }
+
+    HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, 0, pid);
+    if (process == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "[-] Failed to create process handle Error: %lu\n", GetLastError());
+        CloseHandle(halt_thread);
+        return;
+    }
+
+    EnumThreads(pid);
+
+    DWORD tid = 0;
+    printf("\n[~] Please enter Thread ID: ");
+    scanf("%lu", &tid);
+
+    HANDLE thread = OpenThread(THREAD_ALL_ACCESS, 0, tid);
+    if (thread == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "[-] Failed to create thread handle Error: %lu\n", GetLastError());
+        CloseHandle(process);
+        CloseHandle(halt_thread);
+        return;
+    }
+
+    CONTEXT cx;
+    cx.ContextFlags = CONTEXT_ALL;
+    GetThreadContext(thread, &cx);
+
+    DEBUG_EVENT debug_ev;
+
+    cx.EFlags |= 0x100;
+    if (!SetThreadContext(thread, &cx)) {
+        fprintf(stderr, "[-] Failed to set thread context Error: %lu\n", GetLastError());
+        CloseHandle(thread);
+        CloseHandle(process);
+        CloseHandle(halt_thread);
+        return;
+    };
+
+    while (1) {
+        HANDLE handles[1] = { halt_thread };
+        DWORD wait_result = WaitForMultipleObjects(1, handles, FALSE, 0);
+        if (wait_result == WAIT_OBJECT_0) {
+            DWORD exit_code;
+            GetExitCodeThread(halt_thread, &exit_code);
+
+            cx.EFlags &= ~0x100;
+            SetThreadContext(thread, &cx);
+
+            printf("\n\n[!]Stopped stepping | Code: %lu\n", exit_code);
+            break;
+        }
+
+        if (WaitForDebugEvent(&debug_ev, INFINITE)) {
+            if (debug_ev.dwDebugEventCode == EXCEPTION_DEBUG_EVENT) {
+                if (debug_ev.u.Exception.ExceptionRecord.ExceptionCode == EXCEPTION_SINGLE_STEP) {
+                    printf("\ninstruction has been done\n");
+                }
+            }
+            ContinueDebugEvent(debug_ev.dwProcessId, debug_ev.dwThreadId, DBG_CONTINUE);
+        }
+    }
+
+    CloseHandle(process);
+    CloseHandle(thread);
+    CloseHandle(halt_thread);
+}
+
+void debugger_Examine_Regs(DWORD pid) {
+    HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, 0, pid);
+    if (process == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "[-] Failed to create process handle Error: %lu\n", GetLastError());
+        return;
+    }
+    
+    EnumThreads(pid);
+
+    DWORD tid = 0;
+    printf("\n[~] Please enter Thread ID: ");
+    scanf("%lu", &tid);
+
+    HANDLE thread = OpenThread(THREAD_ALL_ACCESS, 0, tid);
+    if (thread == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "[-] Failed to create thread handle Error: %lu\n", GetLastError());
+        CloseHandle(process);
+        return;
+    }
+
+    CONTEXT cx;
+    cx.ContextFlags = CONTEXT_ALL;
+    GetThreadContext(thread, &cx);
+    
+    PrintContext(&cx);
+
+    CloseHandle(thread);
+    CloseHandle(process);
 }
 
 unsigned char stop_monitoring(void) {
     while (1) {
         Sleep(5000);
         printf("Do you wish to stop monitoring? y,n ");
+        char choice;
+        scanf("%c", &choice);
+        if (choice == 'y') return 1;
+        else if (choice == 'n') Sleep(10000);
+        Sleep(10000);
+    }
+}
+
+unsigned char exit_stepping(void) {
+    while (1) {
+        Sleep(5000);
+        printf("Do you wish to stop step-in mode? y,n ");
         char choice;
         scanf("%c", &choice);
         if (choice == 'y') return 1;
