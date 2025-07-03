@@ -24,3 +24,24 @@ void EnumProcessActive() {
 
     CloseHandle(snap);
 }
+
+void EnumThreads(DWORD pid) {
+    HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+    if (h == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "[-] Failed to create snapshot Error: %lu\n", GetLastError());
+        exit(EXIT_FAILURE);
+    }
+
+    THREADENTRY32 te;
+    te.dwSize = sizeof(te);
+
+    if (Thread32First(h, &te)) {
+        do {
+            if (te.th32OwnerProcessID == pid) {
+                printf("[!]Thread: %lu\n",
+                    te.th32ThreadID);
+            }
+        } while (Thread32Next(h, &te));
+    }
+    CloseHandle(h);
+}
