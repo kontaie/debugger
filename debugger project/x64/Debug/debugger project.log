@@ -1,9 +1,0 @@
-﻿  debugger_main_event.c
-C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(97,26): warning C4474: 'scanf_s' : too many arguments passed for format string
-      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(97,26):
-      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
-  
-C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(318,1): warning C4102: 'contine_dbg': unreferenced label
-  debugger project.vcxproj -> C:\Users\levdk\source\repos\debugger project\x64\Debug\debugger.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
