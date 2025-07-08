@@ -13,21 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\process">
+      <UniqueIdentifier>{0e6f5c3b-cf9a-498e-8697-9ecc9fdd0980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main">
+      <UniqueIdentifier>{f785ce42-f57c-4e80-bdb4-9097ac6e69f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\functions">
+      <UniqueIdentifier>{b136a04c-0878-4ce8-a3f5-9c0f19bd966d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\threads">
+      <UniqueIdentifier>{2e563002-2b0a-46d9-94ca-cc6a32ac0348}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="pe_parse.c">
+      <Filter>Source Files\process</Filter>
+    </ClCompile>
+    <ClCompile Include="peb.c">
+      <Filter>Source Files\process</Filter>
     </ClCompile>
     <ClCompile Include="debugger_main_event.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files\main</Filter>
     </ClCompile>
     <ClCompile Include="ProcessEnum.C">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="threads.c">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="teb.c">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="hardwarebp.c">
+      <Filter>Source Files\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="callstack.c">
+      <Filter>Source Files\functions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="THREADINFOCLASS.h">
+      <Filter>Source Files\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

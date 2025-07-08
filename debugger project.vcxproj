@@ -135,11 +135,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="callstack.c" />
     <ClCompile Include="debugger_main_event.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="peb.c" />
+    <ClCompile Include="pe_parse.c" />
     <ClCompile Include="ProcessEnum.C" />
+    <ClCompile Include="hardwarebp.c" />
+    <ClCompile Include="teb.c" />
+    <ClCompile Include="threads.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="THREADINFOCLASS.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,0 +1,52 @@
+﻿  callstack.c
+  debugger_main_event.c
+  Generating Code...
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(98,26): warning C4474: 'scanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(98,26):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(152,12): warning C4477: 'printf' : format string '% lu' requires an argument of type 'unsigned long', but variadic argument 2 has type 'HANDLE'
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(152,12): warning C4313: 'printf': '%u' in format string conflicts with argument 2 of type 'HANDLE'
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(252,60): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(252,60):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(264,57): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(264,57):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(273,61): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(273,61):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(282,59): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(282,59):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(300,57): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(300,57):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(309,57): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(309,57):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(320,57): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(320,57):
+      placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(322,41): warning C4047: 'function': 'DWORD' differs in levels of indirection from 'void *'
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(322,41): warning C4024: 'parse_eat': different types for formal and actual parameter 2
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(329,40): warning C4477: 'sscanf_s' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'unsigned short *'
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(329,40):
+      consider using '%hd' in the format string
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(329,68): warning C4474: 'sscanf_s' : too many arguments passed for format string
+      C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(329,68):
+      placeholders and their parameters expect 2 variadic arguments, but 4 were provided
+  
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(341,41): warning C4244: 'function': conversion from 'unsigned short' to 'char', possible loss of data
+C:\Users\levdk\source\repos\debugger project\debugger_main_event.c(368,1): warning C4102: 'contine_dbg': unreferenced label
+  debugger project.vcxproj -> C:\Users\levdk\source\repos\debugger project\x64\Debug\debugger.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
